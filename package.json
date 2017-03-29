@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Fabianopb/beer-cellar-api/issues"
   },
-  "homepage": "https://github.com/Fabianopb/beer-cellar-api#readme"
+  "homepage": "https://github.com/Fabianopb/beer-cellar-api#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }

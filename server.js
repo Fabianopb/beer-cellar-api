@@ -1,8 +1,12 @@
-var http = require('http');
+var express = require('express');
+var app = express();
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(3000);
+app.get('/', function(request, response) {
+    response.send('Hello World');
+});
+app.get('/beers', function(request, response) {
+    response.send('No beers in the database yet!');
+});
 
+app.listen(3000);
 console.log('Listening on port 3000...');
