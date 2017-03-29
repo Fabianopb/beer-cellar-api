@@ -1,0 +1,21 @@
+{
+  "name": "beer-cellar-api",
+  "version": "1.0.0",
+  "description": "An experimental API set up with Mongo, Node and Express.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabianopb/beer-cellar-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabianopb/beer-cellar-api/issues"
+  },
+  "homepage": "https://github.com/Fabianopb/beer-cellar-api#readme"
+}
