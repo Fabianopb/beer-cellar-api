@@ -1,19 +1,22 @@
 var express = require('express');
 var app = express();
 
-var mongo = require('mongodb');
+// var bodyParser = require('body-parser');
+// var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
-var MongoServer = mongo.Server;
-var MongoDb = mongo.Db;
+var mongoClient = require('mongodb').MongoClient;
+var db;
 
-var server = new MongoServer('localhost', 28018, {auto_reconnect: true});
-var db = new MongoDb('beerdb', server);
-
-db.open(function(error, database) {
+mongoClient.connect('mongodb://localhost:28018', function(error, database) {
     if (error) {
-        console.log('Cannot connect to the database!', error);
+        console.log('Could not connect to the database!', error);
     } else {
-        console.log('Successfully connected to the database', database.s.databaseName);
+        db = database;
+        db.collections(function(error, collections) {
+            if (collections.length === 0) {
+                db.createCollection('beers');
+            }
+        });
     }
 });
 
@@ -21,7 +24,11 @@ app.get('/', function(request, response) {
     response.send('Hello World!');
 });
 app.get('/beers', function(request, response) {
-    response.send('No beers in the database yet!');
+    db.collection('beers', function(error, collection) {
+        collection.find().toArray(function(error, documents) {
+            response.json(documents);
+        });
+    });
 });
 
 app.listen(3000);
