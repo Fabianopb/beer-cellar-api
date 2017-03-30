@@ -18,8 +18,15 @@ router.route('/')
   .post(bodyParser, function(request, response) {
     var beer = new Beer(request.body);
     beer.save(function(error) {
+      var errorMessage = {};
       if (error) {
-        response.send(error);
+        if (error.errors) {
+          Object.keys(error.errors).forEach(function(key) {
+            errorMessage[key] = error.errors[key].message;
+          });
+          error = errorMessage;
+        }
+        response.status(400).send(error);
       } else {
         response.status(201).json({message: 'Beer created!'});
       }
