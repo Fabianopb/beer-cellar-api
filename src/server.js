@@ -1,27 +1,12 @@
 var express = require('express');
 var app = express();
 
-var db = require('./database');
+var mongoose = require('mongoose');
 
 var beers = require('./routes/beers');
 app.use('/beers', beers);
 
-db.connect('mongodb://localhost:28018', function(error) {
-  if (error) {
-    console.log('Could not connect to the database!', error);
-  } else {
-    db.get().collections(function(error, collections) {
-      if (collections.length === 0) {
-        db.createCollection('beers');
-      }
-    });
-  }
-});
-
-app.use(function(req,res,next){
-  req.db = db;
-  next();
-});
+mongoose.connect('mongodb://localhost:28018');
 
 app.get('/', function(request, response) {
   response.send('Hello World!');

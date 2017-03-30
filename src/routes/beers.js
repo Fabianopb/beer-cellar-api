@@ -1,24 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
-var db = require('../database');
-
 var bodyParser = require('body-parser').json();
+
+var Beer = require('../models/beer');
 
 router.route('/')
   .get(function(request, response) {
-    db.get().collection('beers', function(error, collection) {
-      collection.find().toArray(function(error, documents) {
-        response.json(documents);
-      });
+    Beer.find(function(error, result) {
+      if (error) {
+        response.send(error);
+      } else {
+        response.json(result);
+      }
     });
   })
   .post(bodyParser, function(request, response) {
-    var newBeer = request.body;
-    db.get().collection('beers', function(error, collection) {
-      collection.insertOne(newBeer, function() {
-        response.status(201).json(newBeer);
-      });
+    var beer = new Beer(request.body);
+    beer.save(function(error) {
+      if (error) {
+        response.send(error);
+      } else {
+        response.status(201).json({message: 'Beer created!'});
+      }
     });
   });
 
