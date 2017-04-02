@@ -7,11 +7,11 @@ var Beer = require('../models/beer');
 
 router.route('/')
   .get(function(request, response) {
-    Beer.find(function(error, result) {
+    Beer.find(request.query, function(error, data) {
       if (error) {
         response.send(error);
       } else {
-        response.json(result);
+        response.json(data);
       }
     });
   })
@@ -21,8 +21,35 @@ router.route('/')
       if (error) {
         response.status(400).send(error);
       } else {
-        response.status(201).json({message: 'Beer created!'});
+        response.status(200).json({message: 'Beer created!'});
       }
+    });
+  });
+
+router.route('/:id')
+  .put(bodyParser, function(request, response) {
+    Beer.findById(request.params.id, function(error, data) {
+      if (error) {
+        response.send(error);
+      }
+      data.name = request.body.name || data.name;
+      data.country = request.body.country || data.country;
+      data.save(function(error) {
+        if (error) {
+          response.send(error);
+        }
+        response.status(200).json({ message: 'Beer updated!' });
+      });
+    });
+  })
+  .delete(function(req, response) {
+    Beer.remove({
+      _id: req.params.id
+    }, function(error) {
+      if (error) {
+        response.send(error);
+      }
+      response.status(200).json({ message: 'Successfully deleted' });
     });
   });
 
