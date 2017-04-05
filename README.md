@@ -22,3 +22,16 @@ Launch server:
 ```
 npm run dev
 ```
+
+## consuming the API
+
+Do something
+```
+http://localhost:3000/api
+
+Example response:
+{
+  bla: asdf,
+  woot: qwer
+}
+```
