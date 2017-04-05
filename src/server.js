@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var users = require('./routes/users');
 var beers = require('./routes/beers');
 var passport = require('passport');
 
 app.use(passport.initialize());
+app.use('/users', users);
 app.use('/beers', beers);
 
 mongoose.connect('mongodb://localhost:28018');
