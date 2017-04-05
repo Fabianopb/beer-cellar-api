@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser').json();
-var passport = require('passport');
 var User = require('../models/user');
+var passport = require('passport');
+require('../config/passport');
 
 router.route('/register')
   .post(bodyParser, function(request, response) {
