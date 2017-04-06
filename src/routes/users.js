@@ -7,7 +7,7 @@ var jwt = require('express-jwt');
 require('../config/passport');
 
 var authorize = jwt({
-  secret: process.env.BEER_CELLAR_PASSWORD,
+  secret: process.env.BEER_CELLAR_KEY,
   userProperty: 'payload'
 });
 

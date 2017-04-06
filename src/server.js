@@ -9,7 +9,7 @@ app.use(passport.initialize());
 app.use('/users', users);
 app.use('/beers', beers);
 
-mongoose.connect('mongodb://localhost:28018');
+mongoose.connect(process.env.BEER_CELLAR_MONGODB);
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {

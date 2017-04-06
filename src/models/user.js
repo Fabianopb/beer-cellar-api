@@ -36,7 +36,7 @@ UserSchema.methods.generateJwt = function() {
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000, 10),
-  }, process.env.BEER_CELLAR_PASSWORD); // DO NOT KEEP YOUR SECRET IN THE CODE!
+  }, process.env.BEER_CELLAR_KEY); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
 module.exports = mongoose.model('User', UserSchema);
