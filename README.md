@@ -40,6 +40,7 @@ body: {
 	"password": "testpassword"
 }
 
+=========================
 Example response:
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzUwMSwiaWF0IjoxNDkxNDk4NzAxfQ.ePNtaqPc7UzDS6pZwZ13uDuK7Nj3rrl02TREAkVUqXw"
@@ -58,6 +59,7 @@ body: {
 	"password": "testpassword"
 }
 
+=========================
 Example response:
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8"
@@ -73,6 +75,7 @@ header: {
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8
 }
 
+=========================
 Example response:
 {
   "_id": "58e676cd190bc1bbad6c768d",
@@ -94,6 +97,7 @@ header: {
   Content-Type: application/json
 }
 
+=========================
 Example response:
 [
   {
@@ -125,6 +129,7 @@ header: {
   Content-Type: application/json
 }
 
+=========================
 Example response:
 [
   {
@@ -149,6 +154,7 @@ body: {
 	"country": "Finland"
 }
 
+=========================
 Example response:
 {
   "message": "Beer created!"
@@ -167,6 +173,7 @@ body: {
 	"country": "Holland"
 }
 
+=========================
 Example response:
 {
   "message": "Beer updated!"
@@ -181,6 +188,7 @@ header: {
   Content-Type: application/json
 }
 
+=========================
 Example response:
 {
   "message": "Successfully deleted"
