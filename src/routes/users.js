@@ -17,7 +17,6 @@ router.route('/register')
     user.name = request.body.name;
     user.email = request.body.email;
     user.setPassword(request.body.password);
-    console.log('user:', user);
     user.save(function(error) {
       if (error) {
         response.status(400).send(error);
