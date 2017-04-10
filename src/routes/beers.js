@@ -51,9 +51,10 @@ router.route('/:id')
       });
     });
   })
-  .delete(authorize, function(req, response) {
+  .delete(authorize, function(request, response) {
     Beer.remove({
-      _id: req.params.id
+      _id: request.params.id,
+      _creator: request.headers.creator_id || ''
     }, function(error) {
       if (error) {
         return response.send(error);
