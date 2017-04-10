@@ -11,32 +11,35 @@ var authorize = jwt({
 
 router.route('/')
   .get(authorize, function(request, response) {
-    request.query._creator = request.headers.id;
+    request.query._creator = request.headers.creator_id;
     Beer.find(request.query, function(error, data) {
       if (error) {
-        response.send(error);
+        return response.send(error);
       } else {
-        response.json(data);
+        return response.json(data);
       }
     });
   })
-  .post(bodyParser, function(request, response) {
+  .post(authorize, bodyParser, function(request, response) {
     var beer = new Beer(request.body);
-    beer._creator = request.headers.id;
+    beer._creator = request.headers.creator_id;
     beer.save(function(error) {
       if (error) {
-        response.status(400).send(error);
+        return response.status(400).send(error);
       } else {
-        response.status(200).json({message: 'Beer created!'});
+        return response.status(200).json({message: 'Beer created!'});
       }
     });
   });
 
 router.route('/:id')
-  .put(bodyParser, function(request, response) {
+  .put(authorize, bodyParser, function(request, response) {
     Beer.findById(request.params.id, function(error, data) {
       if (error) {
-        response.send(error);
+        return response.send(error);
+      }
+      if (data._creator.toString() !== request.headers.creator_id) {
+        return response.status(401).json({ message: 'UnauthorizedError: unauthorized object' });
       }
       data.name = request.body.name || data.name;
       data.country = request.body.country || data.country;
@@ -44,18 +47,18 @@ router.route('/:id')
         if (error) {
           response.send(error);
         }
-        response.status(200).json({ message: 'Beer updated!' });
+        return response.status(200).json({ message: 'Beer updated!' });
       });
     });
   })
-  .delete(function(req, response) {
+  .delete(authorize, function(req, response) {
     Beer.remove({
       _id: req.params.id
     }, function(error) {
       if (error) {
-        response.send(error);
+        return response.send(error);
       }
-      response.status(200).json({ message: 'Successfully deleted' });
+      return response.status(200).json({ message: 'Successfully deleted' });
     });
   });
 
