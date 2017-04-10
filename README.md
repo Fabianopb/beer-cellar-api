@@ -78,12 +78,18 @@ header: {
 =========================
 Example response:
 {
-  "_id": "58e676cd190bc1bbad6c768d",
-  "hash": "85cb36183a786a117e21cf54ea7d3e7972e07ea4af6a642a92258ce3872625c3bb574e22d2a07f65a8cc4df814ef327cc9a6a1f3fb8b17e51880eeb2408afb15",
-  "salt": "a19c4ee1c0c9e901e9e73360e52fcba0",
-  "email": "roland.gilead@mail.com",
-  "name": "Roland of Gilead",
-  "__v": 0
+  "user": {
+    "_id": "58ebc8fe6fa8885058155caf",
+    "hash": "d8dbaa215dd54d1fa102020fefd7217390711f0a74768cad26e50e9ee0cd99b78318479ccc04708718f3015e654491986b2a37b0669b38d5f3096b3908e045ca",
+    "salt": "88408b7b4059e5d4a660ab2e09fcbd55",
+    "email": "jake.chambers@darktower.com",
+    "name": "Jake Chambers",
+    "__v": 1,
+    "beers": [
+      "58ebd51789ba3f53369334fb"
+    ]
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGViYzhmZTZmYTg4ODUwNTgxNTVjYWYiLCJlbWFpbCI6Impha2UuY2hhbWJlcnNAZGFya3Rvd2VyLmNvbSIsIm5hbWUiOiJKYWtlIENoYW1iZXJzIiwiZXhwIjoxNDkxODUyNzYwLCJpYXQiOjE0OTE4NTA5NjB9.a7gPwsrFoOutGGLChe8tI6684zAD4ReSHdcsQyFuKPQ"
 }
 ```
 
@@ -150,6 +156,7 @@ header: {
   Content-Type: application/json
 }
 body: {
+  "_creator": "58ebc8fe6fa8885058155caf",
 	"name": "Suomenlinnan Panimo",
 	"country": "Finland"
 }
