@@ -89,12 +89,14 @@ Example response:
 
 ### Beers API
 
-Get all beers
+Get all beers (protected route)
 ```
 method: GET
 url: http://localhost:3000/beers
 header: {
-  Content-Type: application/json
+  Content-Type: application/json,
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8,
+  creator_id: "58ebc8fe6fa8885058155caf"
 }
 
 =========================
@@ -102,18 +104,21 @@ Example response:
 [
   {
     "_id": "58dd3d4fcdb2db82b2ff3fa0",
+    "_creator": "58ebc8fe6fa8885058155caf",
     "name": "Guiness",
     "country": "Ireland",
     "__v": 0
   },
   {
     "_id": "58dd3d69cdb2db82b2ff3fa2",
+    "_creator": "58ebc8fe6fa8885058155caf",
     "name": "Colorado",
     "country": "Brazil",
     "__v": 0
   },
   {
     "_id": "58dd433c5142ac85749a582a",
+    "_creator": "58ebc8fe6fa8885058155caf",
     "name": "Heineken",
     "country": "Netherlands",
     "__v": 0
@@ -126,7 +131,9 @@ Get beers that match a query
 method: GET
 url: http://localhost:3000/beers?name=Guiness
 header: {
-  Content-Type: application/json
+  Content-Type: application/json,
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8,
+  creator_id: "58ebc8fe6fa8885058155caf"
 }
 
 =========================
@@ -134,6 +141,7 @@ Example response:
 [
   {
     "_id": "58dd3d4fcdb2db82b2ff3fa0",
+    "_creator": "58ebc8fe6fa8885058155caf",
     "name": "Guiness",
     "country": "Ireland",
     "__v": 0
@@ -141,13 +149,15 @@ Example response:
 ]
 ```
 
-Save a beer in the database
+Save a beer in the database (protected route)
 
 ```
 method: POST
 url: http://localhost:3000/beers
 header: {
-  Content-Type: application/json
+  Content-Type: application/json,
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8,
+  creator_id: "58ebc8fe6fa8885058155caf"
 }
 body: {
   "_creator": "58ebc8fe6fa8885058155caf",

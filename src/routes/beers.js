@@ -1,12 +1,17 @@
 var express = require('express');
 var router = express.Router();
-
 var bodyParser = require('body-parser').json();
-
+var jwt = require('express-jwt');
 var Beer = require('../models/beer');
 
+var authorize = jwt({
+  secret: process.env.BEER_CELLAR_KEY,
+  userProperty: 'payload'
+});
+
 router.route('/')
-  .get(function(request, response) {
+  .get(authorize, function(request, response) {
+    request.query._creator = request.headers.id;
     Beer.find(request.query, function(error, data) {
       if (error) {
         response.send(error);
@@ -17,6 +22,7 @@ router.route('/')
   })
   .post(bodyParser, function(request, response) {
     var beer = new Beer(request.body);
+    beer._creator = request.headers.id;
     beer.save(function(error) {
       if (error) {
         response.status(400).send(error);
