@@ -49,8 +49,7 @@ router.route('/profile')
       response.status(401).json({ message: 'UnauthorizedError: private profile' });
     } else {
       User.findById(request.payload._id).exec(function(error, user) {
-        var token = user.generateJwt();
-        response.status(200).json({ user: user, token: token });
+        response.status(200).json(user);
       });
     }
   });
