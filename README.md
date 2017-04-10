@@ -177,7 +177,9 @@ Edit a beer entry
 method: PUT
 url: http://localhost:3000/beers/58dd433c5142ac85749a582a
 header: {
-  Content-Type: application/json
+  Content-Type: application/json,
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8,
+  creator_id: "58ebc8fe6fa8885058155caf"
 }
 body: {
 	"name": "Heineken",
@@ -196,7 +198,9 @@ Delete a beer
 method: DELETE
 url: http://localhost:3000/beers/58dd433c5142ac85749a582a
 header: {
-  Content-Type: application/json
+  Content-Type: application/json,
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8,
+  creator_id: "58ebc8fe6fa8885058155caf"
 }
 
 =========================
