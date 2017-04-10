@@ -29,7 +29,8 @@ UserSchema.methods.validPassword = function(password) {
 
 UserSchema.methods.generateJwt = function() {
   var expiry = new Date();
-  expiry.setDate(expiry.getDate() + 7);
+  expiry.setMinutes(expiry.getMinutes() + 30);
+  console.log('Expires on:', expiry);
 
   return jwt.sign({
     _id: this._id,
