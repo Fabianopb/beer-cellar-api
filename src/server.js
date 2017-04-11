@@ -7,7 +7,7 @@ var passport = require('passport');
 
 app.use(passport.initialize());
 app.use('/user', users);
-app.use('/user/beers', beers);
+app.use('/beers', beers);
 
 mongoose.connect(process.env.BEER_CELLAR_MONGODB);
 
