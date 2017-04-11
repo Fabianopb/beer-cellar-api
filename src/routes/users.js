@@ -15,37 +15,28 @@ router.route('/register')
     user.save(function(error) {
       if (error) {
         return response.status(400).send(error);
-      } else {
-        var token = user.generateJwt();
-        return response.status(200).json({ token: token });
       }
+      var token = user.generateJwt();
+      return response.status(200).json({ token: token });
     });
   });
 
 router.route('/login')
   .post(bodyParser, function(request, response) {
     passport.authenticate('local', function(error, user, info){
-      if (error) {
-        return response.status(404).json(error);
-      }
-      if(user){
-        var token = user.generateJwt();
-        return response.status(200).json({ token: token });
-      } else {
+      if(!user) {
         return response.status(401).json(info);
       }
+      var token = user.generateJwt();
+      return response.status(200).json({ token: token });
     })(request, response);
   });
 
 router.route('/profile')
-  .get(authorize.token, function(request, response) {
-    if (!request.payload._id) {
-      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
-    } else {
-      User.findById(request.payload._id).exec(function(error, user) {
-        return response.status(200).json(user);
-      });
-    }
+  .get(authorize, function(request, response) {
+    User.findById(request.payload._id, function(error, user) {
+      return response.status(200).json(user);
+    });
   });
 
 module.exports = router;
