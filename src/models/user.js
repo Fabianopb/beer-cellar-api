@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var Beer = require('../models/beer');
 
 var UserSchema = new Schema({
   email: {
@@ -14,7 +15,8 @@ var UserSchema = new Schema({
     required: true
   },
   hash: String,
-  salt: String
+  salt: String,
+  beers: [Beer.schema]
 });
 
 UserSchema.methods.setPassword = function(password){
