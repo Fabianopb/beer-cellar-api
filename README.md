@@ -92,7 +92,7 @@ Example response:
 Get all beers (protected route)
 ```
 method: GET
-url: http://localhost:3000/user/beers
+url: http://localhost:3000/beers
 header: {
   Content-Type: application/json,
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8
@@ -129,7 +129,7 @@ Save a beer in the database (protected route)
 
 ```
 method: POST
-url: http://localhost:3000/user/beers
+url: http://localhost:3000/beers
 header: {
   Content-Type: application/json,
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8
@@ -150,7 +150,7 @@ Example response:
 Edit a beer entry
 ```
 method: PUT
-url: http://localhost:3000/user/beers/58dd433c5142ac85749a582a
+url: http://localhost:3000/beers/58dd433c5142ac85749a582a
 header: {
   Content-Type: application/json,
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8
@@ -170,7 +170,7 @@ Example response:
 Delete a beer
 ```
 method: DELETE
-url: http://localhost:3000/user/beers/58dd433c5142ac85749a582a
+url: http://localhost:3000/beers/58dd433c5142ac85749a582a
 header: {
   Content-Type: application/json,
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGU2NzZjZDE5MGJjMWJiYWQ2Yzc2OGQiLCJlbWFpbCI6InJvbGFuZC5naWxlYWRAbWFpbC5jb20iLCJuYW1lIjoiUm9sYW5kIG9mIEdpbGVhZCIsImV4cCI6MTQ5MjEwMzU5MSwiaWF0IjoxNDkxNDk4NzkxfQ.0Esj0ugc1mQ6mhYzFamtf682bS4Mcj6OcMej57F0Rv8

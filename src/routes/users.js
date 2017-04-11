@@ -3,13 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser').json();
 var User = require('../models/user');
 var passport = require('passport');
-var jwt = require('express-jwt');
+var authorize = require('../config/authorize');
 require('../config/passport');
-
-var authorize = jwt({
-  secret: process.env.BEER_CELLAR_KEY,
-  userProperty: 'payload'
-});
 
 router.route('/register')
   .post(bodyParser, function(request, response) {
@@ -43,7 +38,7 @@ router.route('/login')
   });
 
 router.route('/profile')
-  .get(authorize, function(request, response) {
+  .get(authorize.token, function(request, response) {
     if (!request.payload._id) {
       return response.status(401).json({ message: 'UnauthorizedError: private profile' });
     } else {

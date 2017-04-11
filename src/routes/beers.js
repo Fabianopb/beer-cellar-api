@@ -1,28 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser').json();
-var jwt = require('express-jwt');
 var User = require('../models/user');
 var Beer = require('../models/beer');
-
-var authorize = jwt({
-  secret: process.env.BEER_CELLAR_KEY,
-  userProperty: 'payload'
-});
+var authorize = require('../config/authorize');
 
 router.route('/')
-  .get(authorize, function(request, response) {
-    if (!request.payload._id) {
-      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
-    }
+  .get(authorize.token, function(request, response) {
+    authorize.userId(request.payload._id, response);
+    User.find({id: request.payload.id, 'beers.name': request.query.name}, function(error, user) {
+      console.log(user);
+    });
     User.findById(request.payload._id, function(error, user) {
       return response.status(200).json(user.beers);
     });
   })
-  .post(authorize, bodyParser, function(request, response) {
-    if (!request.payload._id) {
-      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
-    }
+  .post(authorize.token, bodyParser, function(request, response) {
+    authorize.userId(request.payload._id, response);
     User.findById(request.payload._id, function(error, user) {
       var beer = new Beer(request.body);
       user.beers.push(beer);
@@ -34,10 +28,8 @@ router.route('/')
   });
 
 router.route('/beers/:id')
-  .put(authorize, bodyParser, function(request, response) {
-    if (!request.payload._id) {
-      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
-    }
+  .put(authorize.token, bodyParser, function(request, response) {
+    authorize.userId(request.payload._id, response);
     User.findById(request.payload._id, function(error, user) {
       var beer = user.beers.id(request.params.id);
       beer.name = request.body.name || beer.name;
@@ -48,10 +40,8 @@ router.route('/beers/:id')
       });
     });
   })
-  .delete(authorize, function(request, response) {
-    if (!request.payload._id) {
-      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
-    }
+  .delete(authorize.token, function(request, response) {
+    authorize.userId(request.payload._id, response);
     User.findById(request.payload._id, function(error, user) {
       user.beers.id(request.params.id).remove();
       user.save(function(error) {
