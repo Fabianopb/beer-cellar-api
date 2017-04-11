@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser').json();
 var jwt = require('express-jwt');
+var User = require('../models/user');
 var Beer = require('../models/beer');
 
 var authorize = jwt({
@@ -11,55 +12,52 @@ var authorize = jwt({
 
 router.route('/')
   .get(authorize, function(request, response) {
-    request.query._creator = request.headers.creator_id;
-    Beer.find(request.query, function(error, data) {
-      if (error) {
-        return response.send(error);
-      } else {
-        return response.json(data);
-      }
+    if (!request.payload._id) {
+      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
+    }
+    User.findById(request.payload._id, function(error, user) {
+      return response.status(200).json(user.beers);
     });
   })
   .post(authorize, bodyParser, function(request, response) {
-    var beer = new Beer(request.body);
-    beer._creator = request.headers.creator_id;
-    beer.save(function(error) {
-      if (error) {
-        return response.status(400).send(error);
-      } else {
+    if (!request.payload._id) {
+      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
+    }
+    User.findById(request.payload._id, function(error, user) {
+      var beer = new Beer(request.body);
+      user.beers.push(beer);
+      user.save(function(error) {
+        if(error) { return response.status(400).send(error); }
         return response.status(200).json({message: 'Beer created!'});
-      }
+      });
     });
   });
 
-router.route('/:id')
+router.route('/beers/:id')
   .put(authorize, bodyParser, function(request, response) {
-    Beer.findById(request.params.id, function(error, data) {
-      if (error) {
-        return response.send(error);
-      }
-      if (data._creator.toString() !== request.headers.creator_id) {
-        return response.status(401).json({ message: 'UnauthorizedError: unauthorized object' });
-      }
-      data.name = request.body.name || data.name;
-      data.country = request.body.country || data.country;
-      data.save(function(error) {
-        if (error) {
-          response.send(error);
-        }
-        return response.status(200).json({ message: 'Beer updated!' });
+    if (!request.payload._id) {
+      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
+    }
+    User.findById(request.payload._id, function(error, user) {
+      var beer = user.beers.id(request.params.id);
+      beer.name = request.body.name || beer.name;
+      beer.country = request.body.country || beer.country;
+      user.save(function(error) {
+        if(error) { return response.status(400).send(error); }
+        return response.status(200).json({message: 'Beer updated!'});
       });
     });
   })
   .delete(authorize, function(request, response) {
-    Beer.remove({
-      _id: request.params.id,
-      _creator: request.headers.creator_id || ''
-    }, function(error) {
-      if (error) {
-        return response.send(error);
-      }
-      return response.status(200).json({ message: 'Successfully deleted' });
+    if (!request.payload._id) {
+      return response.status(401).json({ message: 'UnauthorizedError: private profile' });
+    }
+    User.findById(request.payload._id, function(error, user) {
+      user.beers.id(request.params.id).remove();
+      user.save(function(error) {
+        if(error) { return response.status(400).send(error); }
+        return response.status(200).json({message: 'Beer deleted!'});
+      });
     });
   });
 
