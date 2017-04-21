@@ -33,12 +33,14 @@ UserSchema.methods.generateJwt = function() {
   var expiry = new Date();
   expiry.setMinutes(expiry.getMinutes() + 30);
 
-  return jwt.sign({
+  var token = jwt.sign({
     _id: this._id,
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000, 10),
-  }, process.env.BEER_CELLAR_KEY); // DO NOT KEEP YOUR SECRET IN THE CODE!
+  }, process.env.BEER_CELLAR_KEY);
+
+  return { token: token, expiry: expiry };
 };
 
 module.exports = mongoose.model('User', UserSchema);

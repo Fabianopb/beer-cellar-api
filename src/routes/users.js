@@ -16,8 +16,8 @@ router.route('/register')
       if (error) {
         return response.status(400).send(error);
       }
-      var token = user.generateJwt();
-      return response.status(200).json({ token: token });
+      var tokenSignature = user.generateJwt();
+      return response.status(200).json(tokenSignature);
     });
   });
 
@@ -27,8 +27,8 @@ router.route('/login')
       if(!user) {
         return response.status(401).json(info);
       }
-      var token = user.generateJwt();
-      return response.status(200).json({ token: token });
+      var tokenSignature = user.generateJwt();
+      return response.status(200).json(tokenSignature);
     })(request, response);
   });
 
