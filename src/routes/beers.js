@@ -5,10 +5,10 @@ var User = require('../models/user');
 var Beer = require('../models/beer');
 var authorize = require('../config/authorize');
 
-var saveData = function(user, error, response, message) {
+var saveData = function(user, error, response, message, object) {
   user.save(function(error) {
     if(error) { return response.status(400).send(error); }
-    return response.status(200).json({message: message});
+    return response.status(200).json({message: message, beer: object || null});
   });
 };
 
@@ -22,7 +22,7 @@ router.route('/')
     User.findById(request.payload._id, function(error, user) {
       var beer = new Beer(request.body);
       user.beers.push(beer);
-      saveData(user, error, response, 'Beer created!');
+      saveData(user, error, response, 'Beer created!', beer);
     });
   });
 
