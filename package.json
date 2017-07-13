@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "An experimental API set up with Mongo, Node and Express.",
   "main": "server.js",
+  "engines": {
+    "node": "7.10.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
